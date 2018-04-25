@@ -2,16 +2,7 @@
 
 #include <stddef.h>
 
-#define FOR_MAZE
-#ifdef FOR_MAZE
-typedef struct Point{
-    int row;
-    int col;
-}Point;
-typedef Point SeqStackType;
-#else
 typedef char SeqStackType;
-#endif
 
 #define SEQ_STACK_SIZE 100
 
