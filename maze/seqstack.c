@@ -1,4 +1,5 @@
-#include "../seqstack/seqstack.h"
+#include "seqstack.h"
+#include <string.h>
 
 //初始化
 void SeqStackInit(SeqStack* stack){
@@ -50,6 +51,42 @@ int SeqStackTop(SeqStack* stack, SeqStackType* value){
 	return 1;
 }
 
+size_t SeqStackSize(SeqStack* stack){
+    if(stack == NULL){
+        return (size_t)-1;    //非法输入
+    }
+    return stack->size;
+}
+
+void SeqStackAssign(SeqStack* from, SeqStack* to){
+    if(from == NULL || to == NULL){
+        return;  //非法输入
+    }
+    to->size = from->size;
+    size_t i = 0;
+    for(; i < from->size; ++i){
+        to->data[i] = from->data[i];
+    }
+   //memcpy(to, from, sizeof(SeqStack));
+   //*to = *from;
+}     
+
+#ifdef FOR_MAZE
+#include <stdio.h>
+void SeqStackDebugPrintPoint(SeqStack* stack, const char* msg){
+    if(stack == NULL){
+        printf("stack == NULL\n");
+        return;
+    }
+    printf("\n%s\n", msg);
+    printf("[栈底]\n");
+    size_t i = 0;
+    for(; i < stack->size; ++i){
+        printf("(%d, %d)\n", stack->data[i].row, stack->data[i].col);
+    }
+    printf("[栈顶]\n");
+}
+#endif
 
 ////////////////////////////////////////////////////////////
 //以下是测试函数
