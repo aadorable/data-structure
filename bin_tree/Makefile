@@ -1,4 +1,4 @@
-bin_tree:bin_tree.c test.c
+bin_tree:bin_tree.c test.c seqqueue.c
 	gcc $^ -o $@
 .PHONY:clean
 clean:

@@ -1,4 +1,5 @@
 #include "bin_tree.h"
+#include "seqqueue.h"
 
 #include <stdio.h>
 
@@ -48,9 +49,31 @@ void PostOrder(TreeNode* root){
 	printf("%c ",root->data);
 }
 
-//void LevelOrder(TreeNode* root){
-//
-//}
+void LevelOrder(TreeNode* root){
+    if(root == NULL){
+        //空树
+        return;
+    }
+    SeqQueue q;
+    SeqQueueInit(&q);
+    //1.先把根节点插入到队列
+    SeqQueuePush(&q, root);
+    //2.循环取队首元素
+    TreeNode* cur = NULL;
+    while(SeqQueueFront(&q, &cur)){
+         //3.访问队首元素并出队列
+         printf("%c ", cur->data);
+         SeqQueuePop(&q);
+         //4.将队首元素的左右子树依次入队列
+         if(cur->lchild != NULL){
+             SeqQueuePush(&q, cur->lchild);
+         }
+         if(cur->rchild != NULL){
+             SeqQueuePush(&q, cur->rchild);
+         }
+         //5.进入下一次循环，直到队列为空
+    }
+}
 
 TreeNode* _TreeCreate(TreeNodeType array[], size_t size, size_t* index, TreeNodeType null_node){
     if(index == NULL){

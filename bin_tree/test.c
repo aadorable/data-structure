@@ -83,6 +83,30 @@ void TestPostOrder(){
 	printf("\n");
 }
 
+void TestLevelOrder(){
+    TEST_HEADER;
+    TreeNode* root;
+    TreeInit(&root);
+    TreeNode* a = CreateTreeNode('a');
+	TreeNode* b = CreateTreeNode('b');
+	TreeNode* c = CreateTreeNode('c');
+	TreeNode* d = CreateTreeNode('d');
+	TreeNode* e = CreateTreeNode('e');
+	TreeNode* f = CreateTreeNode('f');
+	TreeNode* g = CreateTreeNode('g');
+	a->lchild = b;
+	a->rchild = c;
+	b->lchild = d;
+	b->rchild = e;
+	e->lchild = g;
+	c->rchild = f;
+	root = a;
+
+    printf("[层序遍历结果]：");
+    LevelOrder(root);
+    printf("\n");
+}
+
 void TestCreate(){
     TEST_HEADER;
     TreeNodeType array[] = "abd##eg###c#f##";
@@ -150,6 +174,7 @@ int main(){
 	TestPreOrder();
 	TestInOrder();
 	TestPostOrder();
+    TestLevelOrder();
     TestCreate();
     TestDestroy();
     TestClone();
