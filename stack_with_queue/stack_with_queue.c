@@ -23,7 +23,7 @@ void StackPush(Stack* stack, StackType value){
         return;
     }
     SeqQueue* entry = SeqQueueSize(&stack->queue1) > 0 ? &stack->queue1 : &stack->queue2;
-    SeqQueuePush(entry, value);
+    SeqQueuePush(entry, value);   //直接对非空队列入栈即可
 }
 
 void StackPop(Stack* stack){
@@ -39,13 +39,13 @@ void StackPop(Stack* stack){
     }
     SeqQueue* exitus = size1 > 0 ? &stack->queue1 : &stack->queue2;
     SeqQueue* backup = size1 == 0 ? &stack->queue1 : &stack->queue2;
-    while(SeqQueueSize(exitus) > 1){
+    while(SeqQueueSize(exitus) > 1){      //进行搬运，将原来的队首搬运到另一个队列队尾
         StackType tmp;
         SeqQueueFront(exitus, &tmp);
         SeqQueuePop(exitus);
         SeqQueuePush(backup, tmp);
     }
-    SeqQueuePop(exitus);
+    SeqQueuePop(exitus);     //最后进行出队列操作
 }
 
 int StackTop(Stack* stack, StackType* value){
@@ -62,7 +62,7 @@ int StackTop(Stack* stack, StackType* value){
     SeqQueue* non_empty = size1 > 0 ? &stack->queue1 : &stack->queue2;
     SeqQueue* empty = size1 == 0 ? &stack->queue1 : &stack->queue2;
     StackType tmp;
-    while(SeqQueueSize(non_empty) > 0){
+    while(SeqQueueSize(non_empty) > 0){      //同样进行搬运操作
         SeqQueueFront(non_empty, &tmp);
         SeqQueuePop(non_empty);
         SeqQueuePush(empty, tmp);
