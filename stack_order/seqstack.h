@@ -20,3 +20,5 @@ void SeqStackPush(SeqStack* stack, SeqStackType value);		//入栈
 void SeqStackPop(SeqStack* stack);		//出栈
 
 int SeqStackTop(SeqStack* stack, SeqStackType* value);		//取栈顶元素
+
+size_t SeqStackSize(SeqStack* stack);      //栈的大小

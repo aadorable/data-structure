@@ -50,6 +50,9 @@ int SeqStackTop(SeqStack* stack, SeqStackType* value){
 	return 1;
 }
 
+size_t SeqStackSize(SeqStack* stack){
+    return stack->size;
+}
 
 ////////////////////////////////////////////////////////////
 //以下是测试函数
