@@ -34,7 +34,7 @@ size_t TreeLeafSize(TreeNode* root);    //求树的叶子节点数
 
 size_t TreeKLevelSize(TreeNode* root, int K);   //求树的第K层节点数
 
-size_t TreeHeight(TreeNode* root);
+size_t TreeHeight(TreeNode* root);        //树的高度
 
 TreeNode* TreeFind(TreeNode* root, TreeNodeType to_find);
 

@@ -158,3 +158,22 @@ size_t TreeLeafSize(TreeNode* root){
     }
     return TreeLeafSize(root->lchild) + TreeLeafSize(root->rchild);
 }
+
+size_t TreeKLevelSize(TreeNode* root, int K){
+    if(root == NULL || K < 1){
+        return 0;
+    }
+    if(K == 1){
+        return 1;
+    }
+    return TreeKLevelSize(root->lchild, K - 1) + TreeKLevelSize(root->rchild, K - 1);
+}
+
+size_t TreeHeight(TreeNode* root){
+    if(root == NULL){
+        return 0;
+    }
+    size_t lheight = TreeHeight(root->lchild);
+    size_t rheight = TreeHeight(root->rchild);
+    return lheight > rheight ? lheight + 1 : rheight + 1;
+}

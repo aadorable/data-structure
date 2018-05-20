@@ -165,8 +165,22 @@ void TestSize(){
 void TestLeafSize(){
     TEST_HEADER;
     TreeNodeType array[] = "abd##eg###c#f##";
-    TreeNode* root = TreeCreate(array,strlen(array),'#');
-    printf("leafsize expect 3, actual %lu\n",TreeLeafSize(root));
+    TreeNode* root = TreeCreate(array, strlen(array), '#');
+    printf("leafsize expect 3, actual %lu\n", TreeLeafSize(root));
+}
+
+void TestKLevelSize(){
+    TEST_HEADER;
+    TreeNodeType array[] = "abd##eg###c#f##";
+    TreeNode* root = TreeCreate(array, strlen(array), '#');
+    printf("3LevelSize expect 3, actual %lu\n", TreeKLevelSize(root, 3));
+}
+
+void TestHeight(){
+    TEST_HEADER;
+    TreeNodeType array[] = "abd##eg###c#f##";
+    TreeNode* root = TreeCreate(array, strlen(array), '#');
+    printf("height expect 4, actual %lu\n", TreeHeight(root));
 }
 
 int main(){
@@ -180,5 +194,7 @@ int main(){
     TestClone();
     TestSize();
     TestLeafSize();
+    TestKLevelSize();
+    TestHeight();
 	return 0;
 }
