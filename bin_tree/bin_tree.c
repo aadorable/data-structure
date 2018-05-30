@@ -177,3 +177,41 @@ size_t TreeHeight(TreeNode* root){
     size_t rheight = TreeHeight(root->rchild);
     return lheight > rheight ? lheight + 1 : rheight + 1;
 }
+
+TreeNode* TreeFind(TreeNode* root, TreeNodeType to_find){
+    if(root == NULL){
+        return NULL;
+    }
+    if(root->data == to_find){
+        return root;
+    }
+    TreeNode* lresult = TreeFind(root->lchild, to_find);
+    TreeNode* rresult = TreeFind(root->rchild, to_find);
+    return lresult != NULL ? lresult : rresult;
+}
+
+TreeNode* LChild(TreeNode* node){
+    if(node == NULL){
+        return NULL;
+    }
+    return node->lchild;
+}
+
+TreeNode* RChild(TreeNode* node){
+    if(node == NULL){
+        return NULL;
+    }
+    return node->rchild;
+}
+
+TreeNode* Parent(TreeNode* root, TreeNode* node){
+    if(root == NULL || node == NULL){
+        return NULL;
+    }
+    if(root->lchild == node || root->rchild == node){
+        return root;
+    }
+    TreeNode* lresult = Parent(root->lchild, node);
+    TreeNode* rresult = Parent(root->rchild, node);
+    return lresult != NULL ? lresult : rresult;
+}

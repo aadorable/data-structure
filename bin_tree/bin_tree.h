@@ -36,13 +36,13 @@ size_t TreeKLevelSize(TreeNode* root, int K);   //求树的第K层节点数
 
 size_t TreeHeight(TreeNode* root);        //树的高度
 
-TreeNode* TreeFind(TreeNode* root, TreeNodeType to_find);
+TreeNode* TreeFind(TreeNode* root, TreeNodeType to_find);     //查找元素
 
-TreeNode* LChild(TreeNode* node);
+TreeNode* LChild(TreeNode* node);       //左孩子节点
 
-TreeNode* RChild(TreeNode* node);
+TreeNode* RChild(TreeNode* node);       //右孩子节点
 
-TreeNode* Parent(TreeNode* root, TreeNode* node);
+TreeNode* Parent(TreeNode* root, TreeNode* node);       //父亲节点
 
 void PreOrderByLoop(TreeNode* root);
 

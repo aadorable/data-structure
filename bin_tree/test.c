@@ -1,6 +1,7 @@
-
 #include "bin_tree.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #define TEST_HEADER printf("\n========================%s====================\n",__FUNCTION__)
 
@@ -183,6 +184,45 @@ void TestHeight(){
     printf("height expect 4, actual %lu\n", TreeHeight(root));
 }
 
+void TestFind(){
+    TEST_HEADER;
+    TreeNodeType array[] = "abd##eg###c#f##";
+    TreeNode* root = TreeCreate(array, strlen(array), '#');
+    TreeNode* find = TreeFind(root, 'd');
+    printf("find->data expect d, actual %c\n", find->data);
+}
+
+void TestLChild(){
+    TEST_HEADER;
+    TreeNodeType array[] = "abd##eg###c#f##";
+    TreeNode* root = TreeCreate(array, strlen(array), '#');
+    TreeNode* find = TreeFind(root, 'b');
+    TreeNode* lchild = LChild(find);
+    printf("lchild->data expect d, actual %c\n", lchild->data);
+}
+
+void TestRChild(){
+    TEST_HEADER;
+    TreeNodeType array[] = "abd##eg###c#f##";
+    TreeNode* root = TreeCreate(array, strlen(array), '#');
+    TreeNode* find = TreeFind(root, 'b');
+    TreeNode* rchild = RChild(find);
+    printf("rchild->data expect e, actual %c\n", rchild->data);
+}
+
+void TestParent(){
+    TEST_HEADER;
+    TreeNodeType array[] = "abd##eg###c#f##";
+    TreeNode* root = TreeCreate(array, strlen(array), '#');
+    TreeNode* find = TreeFind(root, 'b');
+    TreeNode* parent = Parent(root, find);
+    printf("b parent expect a, actual %c\n", parent->data);
+
+    find = TreeFind(root, 'f');
+    parent = Parent(root, find);
+    printf("f parent expect c, actual %c\n", parent->data);
+}
+
 int main(){
 	TestInit();
 	TestPreOrder();
@@ -196,5 +236,9 @@ int main(){
     TestLeafSize();
     TestKLevelSize();
     TestHeight();
+    TestFind();
+    TestLChild();
+    TestRChild();
+    TestParent();
 	return 0;
 }
