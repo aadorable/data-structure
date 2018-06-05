@@ -44,7 +44,7 @@ TreeNode* RChild(TreeNode* node);       //右孩子节点
 
 TreeNode* Parent(TreeNode* root, TreeNode* node);       //父亲节点
 
-void PreOrderByLoop(TreeNode* root);
+void PreOrderByLoop(TreeNode* root);     //非递归版本的先序遍历
 
 void InOrderByLoop(TreeNode* root);
 

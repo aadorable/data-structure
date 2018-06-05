@@ -1,7 +1,9 @@
 #include "bin_tree.h"
-#include "seqqueue.h"
 
 #include <stdio.h>
+
+#include "seqqueue.h"
+#include "seqstack.h"
 
 TreeNode* CreateTreeNode(TreeNodeType value){
 	TreeNode* new_node = (TreeNode*)malloc(sizeof(TreeNode));
@@ -214,4 +216,34 @@ TreeNode* Parent(TreeNode* root, TreeNode* node){
     TreeNode* lresult = Parent(root->lchild, node);
     TreeNode* rresult = Parent(root->rchild, node);
     return lresult != NULL ? lresult : rresult;
+}
+
+void PreOrderByLoop(TreeNode* root){
+    if(root == NULL){
+        return;
+    }
+    SeqStack stack;
+    SeqStackInit(&stack);
+    SeqStackPush(&stack, root);
+    while(1){
+        TreeNode* top = NULL;
+        SeqStackTop(&stack, &top);
+        if(top == NULL){
+            //遍历完
+            break;
+        }
+        //访问当前栈顶元素
+        printf("%c ", top->data);
+        //将栈顶元素出栈
+        SeqStackPop(&stack);
+
+        //把当前元素右子树和左子树分别入栈
+        if(top->rchild != NULL){
+            SeqStackPush(&stack, top->rchild);
+        }
+        if(top->lchild != NULL){
+            SeqStackPush(&stack, top->lchild);
+        }
+    }
+    printf("\n");
 }

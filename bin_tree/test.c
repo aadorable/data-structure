@@ -223,6 +223,13 @@ void TestParent(){
     printf("f parent expect c, actual %c\n", parent->data);
 }
 
+void TestPreOrderByLoop(){
+    TEST_HEADER;
+    TreeNodeType array[] = "abd##eg###c#f##";
+    TreeNode* root = TreeCreate(array, strlen(array), '#');
+    PreOrderByLoop(root);
+}
+
 int main(){
 	TestInit();
 	TestPreOrder();
