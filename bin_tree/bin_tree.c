@@ -247,3 +247,67 @@ void PreOrderByLoop(TreeNode* root){
     }
     printf("\n");
 }
+
+void InOrderByLoop(TreeNode* root){
+    if(root == NULL){
+        return;
+    }
+    SeqStack stack;
+    SeqStackInit(&stack);
+    TreeNode* cur = root;
+    while(1){
+        //1.从根结点出发，尝试找到当前树的最左侧节点 
+        //  每次经过一个节点，就把这个节点入栈
+        while(cur != NULL){
+            SeqStackPush(&stack, cur);
+            cur = cur->lchild;
+        }
+        //2.取栈顶元素，访问，并将该元素出栈
+        TreeNode* top = NULL;
+        SeqStackTop(&stack, &top);
+        if(top == NULL){
+            //遍历结束
+            break;
+        }
+        printf("%c ", top->data);
+        SeqStackPop(&stack);
+        //3.处理当前元素的右子树，回到循环开始，再去找右子树的最左节点
+        cur = top->rchild;
+    }
+    printf("\n");
+    return;
+}
+
+void PostOrderByLoop(TreeNode* root){
+    if(root == NULL){
+        return;
+    }
+    SeqStack stack;
+    SeqStackInit(&stack);
+    TreeNode* cur = root;
+    TreeNode* pre = NULL;
+    while(1){
+        while(cur != NULL){
+            SeqStackPush(&stack, cur);
+            cur = cur->lchild;
+        }
+        TreeNode* top = NULL;
+        SeqStackTop(&stack, &top);
+        if(top == NULL){
+            break;
+        }
+        //取出栈顶元素后，满足以下两个条件之一，才能访问top
+        //1.top 的右子树为空
+        //2.top 的右子树被访问过
+        //否则就需要处理 top 的右子树
+        if(top->rchild == NULL || top->rchild == pre){
+            printf("%c ", top->data);
+            SeqStackPop(&stack);
+            pre = top;
+        }
+        else{
+            cur = top->rchild;
+        }
+    }
+    printf("\n");
+}

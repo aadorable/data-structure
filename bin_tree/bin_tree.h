@@ -46,9 +46,9 @@ TreeNode* Parent(TreeNode* root, TreeNode* node);       //父亲节点
 
 void PreOrderByLoop(TreeNode* root);     //非递归版本的先序遍历
 
-void InOrderByLoop(TreeNode* root);
+void InOrderByLoop(TreeNode* root);      //非递归版本的中序遍历 
 
-void PostOrderByLoop(TreeNode* root);
+void PostOrderByLoop(TreeNode* root);    //非递归版本的后序遍历
 
 void TreeMirror(TreeNode* root);
 

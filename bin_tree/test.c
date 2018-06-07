@@ -227,7 +227,24 @@ void TestPreOrderByLoop(){
     TEST_HEADER;
     TreeNodeType array[] = "abd##eg###c#f##";
     TreeNode* root = TreeCreate(array, strlen(array), '#');
+	printf("[先序遍历结果]：");
     PreOrderByLoop(root);
+}
+
+void TestInOrderByLoop(){
+    TEST_HEADER;
+    TreeNodeType array[] = "abd##eg###c#f##";
+    TreeNode* root = TreeCreate(array, strlen(array), '#');
+	printf("[中序遍历结果]：");
+    InOrderByLoop(root);
+}
+
+void TestPostOrderByLoop(){
+    TEST_HEADER;
+    TreeNodeType array[] = "abd##eg###c#f##";
+    TreeNode* root = TreeCreate(array, strlen(array), '#');
+	printf("[后序遍历结果]：");
+    PostOrderByLoop(root);
 }
 
 int main(){
@@ -247,5 +264,8 @@ int main(){
     TestLChild();
     TestRChild();
     TestParent();
+    TestPreOrderByLoop();
+    TestInOrderByLoop();
+    TestPostOrderByLoop();
 	return 0;
 }
