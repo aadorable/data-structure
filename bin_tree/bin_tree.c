@@ -311,3 +311,14 @@ void PostOrderByLoop(TreeNode* root){
     }
     printf("\n");
 }
+
+void TreeMirror(TreeNode* root){
+    if(root == NULL){
+        return;
+    }
+    TreeNode* tmp = root->lchild;
+    root->lchild = root->rchild;
+    root->rchild = tmp;
+    TreeMirror(root->lchild);
+    TreeMirror(root->rchild);
+}

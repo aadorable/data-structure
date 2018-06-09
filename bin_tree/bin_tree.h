@@ -50,7 +50,6 @@ void InOrderByLoop(TreeNode* root);      //非递归版本的中序遍历
 
 void PostOrderByLoop(TreeNode* root);    //非递归版本的后序遍历
 
-void TreeMirror(TreeNode* root);
+void TreeMirror(TreeNode* root);         //二叉树的镜像
 
 int isCompleteTree(TreeNode* root);
-

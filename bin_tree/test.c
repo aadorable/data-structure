@@ -247,6 +247,19 @@ void TestPostOrderByLoop(){
     PostOrderByLoop(root);
 }
 
+void TestMirror(){
+    TEST_HEADER;
+    TreeNodeType array[] = "abd##eg###c#f##";
+    TreeNode* root = TreeCreate(array, strlen(array), '#');
+    TreeMirror(root);
+	printf("[先序遍历结果]：");
+    PreOrderByLoop(root);
+	printf("[中序遍历结果]：");
+    InOrderByLoop(root);
+	printf("[后序遍历结果]：");
+    PostOrderByLoop(root);
+}
+
 int main(){
 	TestInit();
 	TestPreOrder();
@@ -267,5 +280,6 @@ int main(){
     TestPreOrderByLoop();
     TestInOrderByLoop();
     TestPostOrderByLoop();
+    TestMirror();
 	return 0;
 }
