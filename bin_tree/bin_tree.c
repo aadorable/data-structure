@@ -322,3 +322,48 @@ void TreeMirror(TreeNode* root){
     TreeMirror(root->lchild);
     TreeMirror(root->rchild);
 }
+
+int isCompleteTree(TreeNode* root){
+    if(root == NULL){
+        return -1;
+    }
+    SeqQueue queue;
+    SeqQueueInit(&queue);
+    SeqQueuePush(&queue, root);
+    int flag = 0;      //此标志是为了判断当前节点的两个孩子节点是否为空
+    while(1){
+        TreeNode* top = NULL;
+        SeqQueueFront(&queue, &top);
+        if(top == NULL){
+            //遍历完了
+            break;
+        }
+        //访问当前节点
+        if(flag == 0){
+            if(top->lchild != NULL && top->rchild != NULL){
+                SeqQueuePush(&queue, top->lchild);
+                SeqQueuePush(&queue, top->rchild);
+            }
+            else if(top->lchild == NULL && top->rchild != NULL){
+                return 0;
+            }
+            else if(top->lchild != NULL && top->rchild == NULL){
+                SeqQueuePush(&queue, top->lchild);
+                flag = 1;
+            }
+            else if(top->lchild == NULL && top->rchild == NULL){
+                flag = 1;
+            }
+        }
+        else{
+            if(top->lchild == NULL && top->rchild == NULL){
+                //说明到目前为止还满足完全二叉树的条件
+            }
+            else{
+                return 0;
+            }
+        }
+        SeqQueuePop(&queue);
+    }
+    return 1;
+}

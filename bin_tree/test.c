@@ -260,6 +260,19 @@ void TestMirror(){
     PostOrderByLoop(root);
 }
 
+void TestIsCompleteTree(){
+    TEST_HEADER;
+    TreeNodeType array[] = "abd##eg###c#f##";
+    TreeNode* root = TreeCreate(array, strlen(array), '#');
+    int ret = isCompleteTree(root);
+    printf("ret expect 0, actual %d\n", ret);
+
+    TreeNodeType array1[] = "abd##e##cf###";
+    TreeNode* root1 = TreeCreate(array1, strlen(array1), '#');
+    ret = isCompleteTree(root1);
+    printf("ret expect 1, actual %d\n", ret);
+}
+
 int main(){
 	TestInit();
 	TestPreOrder();
@@ -281,5 +294,6 @@ int main(){
     TestInOrderByLoop();
     TestPostOrderByLoop();
     TestMirror();
+    TestIsCompleteTree();
 	return 0;
 }
