@@ -53,3 +53,5 @@ void PostOrderByLoop(TreeNode* root);    //非递归版本的后序遍历
 void TreeMirror(TreeNode* root);         //二叉树的镜像
 
 int isCompleteTree(TreeNode* root);      //判断该二叉树是否是完全二叉树
+
+TreeNode* ReBuildTree(TreeNodeType pre_order[], size_t pre_order_size, TreeNodeType in_order[], size_t in_order_size);  //重建一棵树

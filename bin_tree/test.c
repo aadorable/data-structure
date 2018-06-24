@@ -273,6 +273,21 @@ void TestIsCompleteTree(){
     printf("ret expect 1, actual %d\n", ret);
 }
 
+void TestReBuild(){
+    TEST_HEADER;
+    TreeNodeType pre_order[] = "abdegcf";
+    TreeNodeType in_order[] = "dbgeacf";
+    TreeNode* root = ReBuildTree(pre_order, strlen(pre_order), in_order, strlen(in_order));
+
+    printf("先序遍历：");
+    PreOrder(root);
+    printf("\n");
+
+    printf("中序遍历：");
+    InOrder(root);
+    printf("\n");
+}
+
 int main(){
 	TestInit();
 	TestPreOrder();
@@ -295,5 +310,6 @@ int main(){
     TestPostOrderByLoop();
     TestMirror();
     TestIsCompleteTree();
+    TestReBuild();
 	return 0;
 }

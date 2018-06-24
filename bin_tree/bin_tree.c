@@ -1,6 +1,7 @@
 #include "bin_tree.h"
 
 #include <stdio.h>
+#include <assert.h>
 
 #include "seqqueue.h"
 #include "seqstack.h"
@@ -366,4 +367,40 @@ int isCompleteTree(TreeNode* root){
         SeqQueuePop(&queue);
     }
     return 1;
+}
+
+size_t Find(TreeNodeType in_order[], size_t in_order_left, size_t in_order_right, TreeNodeType pre_order);
+
+//in_order_left 和 in_order_right,通过这个前闭后开区间
+//哪一段区域表示了当前子树的中序遍历结果
+TreeNode* _ReBuildTree(TreeNodeType pre_order[], size_t pre_order_size, size_t* index, 
+                       TreeNodeType in_order[], size_t in_order_left, size_t in_order_right){
+    if(in_order_left >= in_order_right){
+        //说明当前中序遍历序列为空
+        return NULL;
+    }
+    if(index != NULL && *index >= pre_order_size){
+        //先序遍历结束，树还原成功
+        return NULL;
+    }
+    TreeNode* new_node = CreateTreeNode(pre_order[*index]);
+    //假设取出来的 new_node 值是 A 的话，接下来递归的时候就需要取出A的下一个结点B
+    ++(*index);
+    size_t cur_root_in_order_index = Find(in_order, in_order_left, in_order_right, pre_order[*index]);
+    assert(cur_root_in_order_index != (size_t)-1);
+
+    //递归的处理当前根节点的左子树
+    new_node->lchild = _ReBuildTree(pre_order, pre_order_size, index, in_order, in_order_left, cur_root_in_order_index);
+
+    //递归处理当前根节点的右子树
+    new_node->rchild = _ReBuildTree(pre_order, pre_order_size, index, in_order, cur_root_in_order_index + 1, in_order_right);
+
+    return new_node;
+}
+
+//通过先序遍历的方式还原一棵树
+//中序遍历的结果主要是用来判定某一个结点是左子树还是右子树
+TreeNode* ReBuildTree(TreeNodeType pre_order[], size_t pre_order_size, TreeNodeType in_order[], size_t in_order_size){
+    size_t index = 0;
+    return _ReBuildTree(pre_order, pre_order_size, &index, in_order, 0, in_order_size);
 }
