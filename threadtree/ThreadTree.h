@@ -23,14 +23,14 @@ typedef struct ThreadNode{
 
 ThreadNode* ThreadTreeCreate(ThreadType array[], size_t size, ThreadType invalid);
 
-void PreThreading(ThreadNode* root);
+void PreThreading(ThreadNode* root);     //先序线索
 
-void PreOrderByThreading(ThreadNode* root);
+void PreOrderByThreading(ThreadNode* root);      //先序遍历
 
-void InThreading(ThreadNode* root);
+void InThreading(ThreadNode* root);      //中序线索
 
-void InOrderByThreading(ThreadNode* root);
+void InOrderByThreading(ThreadNode* root);       //中序遍历
 
-void PostThreading(ThreadNode* root);
+void PostThreading(ThreadNode* root);    //后序线索
 
-void PostOrderByThreading(ThreadNode* root);
+void PostOrderByThreading(ThreadNode* root);     //后序遍历
