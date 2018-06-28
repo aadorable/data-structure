@@ -30,9 +30,28 @@ void TestPreOrderByThreading(){
     return;
 }
 
+void TestInThreading(){
+    TEST_HEADER;
+    ThreadType array[] = "ABD##EG###C#F##";
+    ThreadNode* root = ThreadTreeCreate(array, strlen(array), '#');
+    InThreading(root);
+    return;
+}
+
+void TestInOrderByThreading(){
+    TEST_HEADER;
+    ThreadType array[] = "ABD##EG###C#F##";
+    ThreadNode* root = ThreadTreeCreate(array, strlen(array), '#');
+    InThreading(root);
+    InOrderByThreading(root);
+    return;
+}
+
 int main(){
     TestCreate();
     TestPreThreading();
     TestPreOrderByThreading();
+    TestInThreading();
+    TestInOrderByThreading();
     return 0;
 }

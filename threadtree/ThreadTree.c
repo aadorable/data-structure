@@ -85,3 +85,61 @@ void PreOrderByThreading(ThreadNode* root){
     printf("\n");
     return;
 }
+
+void _InThreading(ThreadNode* root, ThreadNode** prev){
+    if(root == NULL || prev == NULL){
+        return;
+    }
+    //处理左子树
+    if(root->lflag == CHILD){
+        _InThreading(root->left, prev);
+    }
+    //处理根节点
+    if(root->left == NULL){
+        root->left = *prev;
+        root->lflag = THREAD;
+    }
+    if(*prev != NULL && (*prev)->right == NULL){
+        (*prev)->right = root;
+        (*prev)->rflag = THREAD;
+    }
+    *prev = root;
+    //处理右子树
+    if(root->rflag == CHILD){
+        _InThreading(root->right, prev);
+    }
+}
+
+void InThreading(ThreadNode* root){
+    ThreadNode* prev = NULL;
+    _InThreading(root, &prev);
+}
+
+void InOrderByThreading(ThreadNode* root){
+    //1.定义cur指针指向root，找到最左侧的结点，并且在寻找的路径上不能访问
+    if(root == NULL){
+        return;
+    }
+    ThreadNode* cur = root;
+    //当循环结束，cur就指向了这棵树的最左侧节点
+    while(cur != NULL && cur->lflag == CHILD){
+        cur = cur->left;
+    }
+    //2.进入循环，访问cur结点，如果cur节点为空，说明遍历完了
+    while(cur != NULL){
+        printf("%c ", cur->data);
+
+        if(cur->rflag == THREAD){
+            //3.如果cur的right刚好是线索，cur指向cur->right
+            cur = cur->right;
+        }else{
+            //4.如果cur的right是子树，需要让cur指向cur->right这个子树的最左侧节点
+            cur = cur->right;
+            while(cur != NULL && cur->lflag == CHILD){
+                cur = cur->left;
+            }
+        }
+    }
+    printf("\n");
+    return;
+}
