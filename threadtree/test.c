@@ -13,7 +13,26 @@ void TestCreate(){
     return;
 }
 
+void TestPreThreading(){
+    TEST_HEADER;
+    ThreadType array[] = "ABD##EG###C#F##";
+    ThreadNode* root = ThreadTreeCreate(array, strlen(array), '#');
+    PreThreading(root);
+    return;
+}
+
+void TestPreOrderByThreading(){
+    TEST_HEADER;
+    ThreadType array[] = "ABD##EG###C#F##";
+    ThreadNode* root = ThreadTreeCreate(array, strlen(array), '#');
+    PreThreading(root);
+    PreOrderByThreading(root);
+    return;
+}
+
 int main(){
     TestCreate();
+    TestPreThreading();
+    TestPreOrderByThreading();
     return 0;
 }
