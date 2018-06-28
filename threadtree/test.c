@@ -47,11 +47,20 @@ void TestInOrderByThreading(){
     return;
 }
 
+void TestPostThreading(){
+    TEST_HEADER;
+    ThreadType array[] = "ABD##EG###C#F##";
+    ThreadNode* root = ThreadTreeCreate(array, strlen(array), '#');
+    PostThreading(root);
+    return;
+}
+
 int main(){
     TestCreate();
     TestPreThreading();
     TestPreOrderByThreading();
     TestInThreading();
     TestInOrderByThreading();
+    TestPostThreading();
     return 0;
 }

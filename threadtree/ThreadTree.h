@@ -34,3 +34,11 @@ void InOrderByThreading(ThreadNode* root);       //中序遍历
 void PostThreading(ThreadNode* root);    //后序线索
 
 void PostOrderByThreading(ThreadNode* root);     //后序遍历
+
+typedef struct TreeNode{
+    char data;
+    struct TreeNode* left;
+    struct TreeNode* right;
+    struct TreeNode* prev;
+    struct TreeNode* next;
+}TreeNode;

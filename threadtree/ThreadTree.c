@@ -143,3 +143,53 @@ void InOrderByThreading(ThreadNode* root){
     printf("\n");
     return;
 }
+
+void _PostThreading(ThreadNode* root, ThreadNode** prev){
+    if(root == NULL || prev == NULL){
+        return;
+    }
+    //处理左子树
+    if(root->lflag == CHILD){
+        _PostThreading(root->left, prev);
+    }
+    //处理右子树
+    if(root->rflag == CHILD){
+        _PostThreading(root->right, prev);
+    }
+    //处理根节点
+    if(root->left == NULL){
+        root->left = *prev;
+        root->lflag = THREAD;
+    }
+    if(*prev != NULL && (*prev)->right == NULL){
+        (*prev)->right = root;
+        (*prev)->rflag = THREAD;
+    }
+    *prev = root;
+}
+
+void PostThreading(ThreadNode* root){
+    ThreadNode* prev = NULL;
+    _PostThreading(root, &prev);
+}
+
+void _PreOrderConvertToList(TreeNode* root, TreeNode** prev){
+    if(root == NULL || prev == NULL){
+        return;
+    }
+    //处理根节点
+    root->prev = *prev;
+    if(*prev != NULL){
+        (*prev)->next = root;
+    }
+    *prev = root;
+    //处理左子树
+    _PreOrderConvertToList(root->left, prev);
+    //处理右子树
+    _PreOrderConvertToList(root->right, prev);
+}
+
+void PreOrderConvertToList(TreeNode* root){
+    TreeNode* prev = NULL;
+    _PreOrderConvertToList(root, &prev);
+}
