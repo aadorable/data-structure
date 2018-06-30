@@ -172,7 +172,27 @@ void ShellSort(int array[], int64_t size){
     return;
 }
 
+////////////////////////////////////////////////////////////
+//归并排序
+////////////////////////////////////////////////////////////
 
+void _MergeSort(int array[], int64_t beg, int64_t end, int* tmp){
+    if(end - beg <= 1){
+        return;
+    }
+    int64_t mid = beg + (end - beg) / 2;
+    _MergeSort(array, beg, mid, tmp);
+    _MergeSort(array, mid, end, tmp);
+    //先保证左右区间均为有序区间后，才能进行合并
+    _MergeArray(array, beg, mid, end, tmp);
+}
+
+void MergeSort(int array[], int64_t size){
+    int* tmp = (int*)malloc(sizeof(int) * size);
+    //[0, size)
+    _MergeSort(array, 0, size, tmp);
+    free(tmp);
+}
 
 void Print(int array[],size_t size){
 	size_t i = 0;
