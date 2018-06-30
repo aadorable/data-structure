@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 /////////////////////////////////////////////
 //冒泡排序
@@ -136,26 +137,40 @@ void InsertSort(int array[],size_t size){
 //时间复杂度：O(N^1.3)
 //空间复杂度：O(1)
 /////////////////////////////////////////////////
-//
-//void ShellSort(int array[],int64_t size){
-//	if(size <= 1){
-//		return;
-//	}
-	//1.先生成步长序列，此处直接按照希尔序列生成
-//	int64_t gap = size/2;
-//	for(;gap > 0;gap/=2){
-//		//生成步长序列
-//		int64_t bound = gap;
-		//完成所有组的所有元素的插入排序
-//		for(;bound< size;++bound){
-			//先处理第一组第一个元素
-			//再处理第二组第一个元素
-			//。。。。
-			//再处理第一组第二个元素
-			//。。。。
-//		}
-//	}
-//}
+
+void ShellSort(int array[], int64_t size){
+	if(size <= 1){
+		return;
+	}
+  //1.先生成步长序列，此处直接按照希尔序列生成
+  //N/2 N/4 N/8 ... 1
+	int64_t gap = size / 2;
+	for(; gap > 0; gap /= 2){
+		//生成步长序列
+		int64_t bound = gap;
+  	    //完成所有组的所有元素的插入排序
+		for(; bound< size; ++bound){
+  		    //先处理第一组第一个元素
+  		    //再处理第二组第一个元素
+  		    //。。。。
+  		    //再处理第一组第二个元素
+  		    //。。。。
+            int value = array[bound];
+            int64_t i = bound;
+            for(; i >= gap; i -= gap){
+                //第三重循环
+                //进行当前元素的插入动作
+                if(array[i - gap] > value){
+                    array[i] = array[i - gap];
+                }else{
+                    break;
+                }
+            }
+            array[i] = value;
+		}
+	}
+    return;
+}
 
 
 
@@ -181,12 +196,17 @@ int main(){
 	printf("\n");
 	
 	HeapSort(array,len);
-	printf("[堆排序后]：");
+	printf("[ 堆排序后 ]：");
 	Print(array,len);
 	printf("\n");
 
 	InsertSort(array,len);
 	printf("[插入排序后]：");
+	Print(array,len);
+	printf("\n");
+
+	ShellSort(array,len);
+	printf("[希尔排序后]：");
 	Print(array,len);
 	printf("\n");
 
