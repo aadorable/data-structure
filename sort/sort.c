@@ -150,7 +150,7 @@ void ShellSort(int array[], int64_t size){
 		//生成步长序列
 		int64_t bound = gap;
   	    //完成所有组的所有元素的插入排序
-		for(; bound< size; ++bound){
+		for(; bound < size; ++bound){
   		    //先处理第一组第一个元素
   		    //再处理第二组第一个元素
   		    //。。。。
@@ -229,6 +229,34 @@ void MergeSort(int array[], int64_t size){
     free(tmp);
 }
 
+//归并排序的非递归版本
+void MergeSortByLoop(int array[], int64_t size){
+    if(size <= 1){
+        return;
+    }
+    int* tmp = (int*)malloc(sizeof(int) * size);
+    int64_t gap = 1;
+    for(; gap < size; gap *= 2){
+        int64_t i = 0;
+        for(; i < size; i += gap * 2){
+            //每次循环其实就是在处理两个相邻的区间
+            int64_t beg = i;
+            int64_t mid = i + gap;
+            int64_t end = i + 2 * gap;
+            if(mid > size){
+                mid = size;
+            }
+            if(end > size){
+                end = size;
+            }
+            //[beg, mid),[mid, end)
+            _MergeArray(array, beg, mid, end, tmp);
+        }
+    }
+    free(tmp);
+}
+
+
 void Print(int array[],size_t size){
 	size_t i = 0;
 	for(;i < size;++i){
@@ -270,6 +298,10 @@ int main(){
 	Print(array,len);
 	printf("\n");
 
+    MergeSortByLoop(array, len);
+	printf("[归并排序后]：");
+	Print(array,len);
+	printf("\n");
 	return 0;
 }
 	
