@@ -259,6 +259,37 @@ void MergeSortByLoop(int array[], int64_t size){
 ///////////////////////////////////////////////////////////
 //快速排序
 //////////////////////////////////////////////////////////
+
+//交换法
+int64_t Partion1(int array[], int64_t beg, int64_t end){
+    //1.先定义好区间的边界
+    int64_t left = beg;
+    int64_t right = end - 1;
+    //2.取最后一个元素作为基准值
+    int key = array[right];
+    while(left < right){
+        //3.从左到右找到一个大于基准值的元素
+        while(left < right && array[left] <= key){
+            ++left;
+        }
+        //4.从右到左找到一个小于基准值的元素
+        while(left < right && array[right] >= key){
+            --right;
+        }
+        //5.进行交换
+        if(left < right){
+            Swap(&array[left], &array[right]);
+        }
+    }
+    //6.此时是将left指向的值和最后一个元素(基准值)进行交换
+    //此时的left指向的值一定大于等于基准值
+    //  a)如果是因为 ++left 导致的循环推出，由于 right 在上一次循环的交换中已经指向一个大于等于基准值的元素
+    //  b)如果是因为 --right 导致的循环推出，由于在刚刚的 left 查找过程中 left 已经找到了一个大于等于基准值的元素
+    //  因此，最终的结论就是 left 指向的值一定大于等于基准值
+    Swap(&array[left], &array[end - 1]);
+    return left;
+}
+
 void _QuickSort(int array[], int64_t beg, int64_t end){
     if(end - beg <= 1){
         return;
@@ -318,6 +349,11 @@ int main(){
 
     MergeSortByLoop(array, len);
 	printf("[归并排序后]：");
+	Print(array,len);
+	printf("\n");
+
+    QuickSort(array, len);
+	printf("[快速排序后]：");
 	Print(array,len);
 	printf("\n");
 	return 0;
