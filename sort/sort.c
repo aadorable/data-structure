@@ -259,6 +259,21 @@ void MergeSortByLoop(int array[], int64_t size){
 ///////////////////////////////////////////////////////////
 //快速排序
 //////////////////////////////////////////////////////////
+void _QuickSort(int array[], int64_t beg, int64_t end){
+    if(end - beg <= 1){
+        return;
+    }
+    //Partion 函数的作用，是对当前[beg, end)区间进行调整
+    //整理成以某个基准值为中心，左侧元素小于等于基准值，右侧元素大于等于基准值
+    //返回值表示的含义是基准值所在的下标
+    int64_t mid = Partion1(array, beg, end);
+    _QuickSort(array, beg, mid);
+    _QuickSort(array, mid + 1, end);
+}
+
+void QuickSort(int array[], int64_t size){
+    _QuickSort(array, 0, size);
+}
 
 void Print(int array[],size_t size){
 	size_t i = 0;
