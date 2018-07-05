@@ -258,6 +258,9 @@ void MergeSortByLoop(int array[], int64_t size){
 
 ///////////////////////////////////////////////////////////
 //快速排序
+//时间复杂度：最坏O(N^2)，序列是完全逆序的
+//            平均O(N*logN)
+//空间复杂度：O(logN)
 //////////////////////////////////////////////////////////
 
 //交换法
@@ -320,6 +323,23 @@ int64_t Partion2(int array[], int64_t beg, int64_t end){
     return left;
 }
 
+//双指针前移法
+int64_t Partion3(int array[], int64_t beg, int64_t end){
+    int64_t cur = beg;
+    int64_t pre = beg - 1;
+    int key = array[end - 1];
+    while(cur < end){
+        if(array[cur] < key && ++pre != cur){
+            Swap(&array[cur], &array[pre]);
+        }
+        ++cur;
+    }
+    if(++pre != end){
+        Swap(&array[pre], &array[end - 1]);
+    }
+    return pre;
+}
+
 void _QuickSort(int array[], int64_t beg, int64_t end){
     if(end - beg <= 1){
         return;
@@ -327,7 +347,7 @@ void _QuickSort(int array[], int64_t beg, int64_t end){
     //Partion 函数的作用，是对当前[beg, end)区间进行调整
     //整理成以某个基准值为中心，左侧元素小于等于基准值，右侧元素大于等于基准值
     //返回值表示的含义是基准值所在的下标
-    int64_t mid = Partion2(array, beg, end);
+    int64_t mid = Partion3(array, beg, end);
     _QuickSort(array, beg, mid);
     _QuickSort(array, mid + 1, end);
 }
