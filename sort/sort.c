@@ -290,6 +290,36 @@ int64_t Partion1(int array[], int64_t beg, int64_t end){
     return left;
 }
 
+//挖坑法
+int64_t Partion2(int array[], int64_t beg, int64_t end){
+    //1.定义好区间边界
+    int64_t left = beg;
+    int64_t right = end - 1;
+    //2.取最后一个元素作为基准值
+    int key = array[right];     //right指向的位置，就可以被覆盖了
+    while(left < right){
+        //从左到右找到一个大于基准值的元素
+        while(left < right && array[left] <= key){
+            ++left;
+        }
+        if(left < right){
+            //将找到的这个大于基准值的元素，填到right指向的坑里
+            //随着填坑动作的完成，left指向的位置也就可以被别人覆盖
+            //left也就成了一个坑
+            array[right--] = array[left];
+        }
+        //4.从右到左找到一个小于基准值的元素
+        while(left < right && array[right] >= key){
+            --right;
+        }
+        if(left < right){
+            array[left++] = array[right];
+        }
+    }
+    array[left] = key;
+    return left;
+}
+
 void _QuickSort(int array[], int64_t beg, int64_t end){
     if(end - beg <= 1){
         return;
@@ -297,7 +327,7 @@ void _QuickSort(int array[], int64_t beg, int64_t end){
     //Partion 函数的作用，是对当前[beg, end)区间进行调整
     //整理成以某个基准值为中心，左侧元素小于等于基准值，右侧元素大于等于基准值
     //返回值表示的含义是基准值所在的下标
-    int64_t mid = Partion1(array, beg, end);
+    int64_t mid = Partion2(array, beg, end);
     _QuickSort(array, beg, mid);
     _QuickSort(array, mid + 1, end);
 }
