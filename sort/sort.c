@@ -2,6 +2,8 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include "seqstack.h"
+
 /////////////////////////////////////////////
 //冒泡排序
 //时间复杂度：O(N^2)
@@ -354,6 +356,10 @@ void _QuickSort(int array[], int64_t beg, int64_t end){
 
 void QuickSort(int array[], int64_t size){
     _QuickSort(array, 0, size);
+}
+
+void QuickSortByLoop(int array[], int64_t size){
+
 }
 
 void Print(int array[],size_t size){
