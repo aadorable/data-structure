@@ -1,8 +1,9 @@
 #pragma once
 
 #include <stddef.h>
+#include <stdlib.h>
 
-typedef char SeqStackType;
+typedef int64_t SeqStackType;
 
 #define SEQ_STACK_SIZE 100
 

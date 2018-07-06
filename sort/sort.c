@@ -359,7 +359,29 @@ void QuickSort(int array[], int64_t size){
 }
 
 void QuickSortByLoop(int array[], int64_t size){
-
+    if(size <= 1){
+        return;
+    }
+    SeqStack stack;
+    SeqStackInit(&stack);
+    int64_t beg = 0;
+    int64_t end = size;
+    SeqStackPush(&stack, beg);
+    SeqStackPush(&stack, end);
+    while(stack.size > 0){
+        SeqStackTop(&stack, &end);
+        SeqStackPop(&stack);
+        SeqStackTop(&stack, &beg);
+        SeqStackPop(&stack);
+        if(end - beg <= 1){
+            continue;
+        }
+        int64_t mid = Partion1(array, beg, end);
+        SeqStackPush(&stack, beg);
+        SeqStackPush(&stack, mid);
+        SeqStackPush(&stack, mid + 1);
+        SeqStackPush(&stack, beg);
+    }
 }
 
 void Print(int array[],size_t size){
@@ -409,6 +431,11 @@ int main(){
 	printf("\n");
 
     QuickSort(array, len);
+	printf("[快速排序后]：");
+	Print(array,len);
+	printf("\n");
+
+    QuickSortByLoop(array, len);
 	printf("[快速排序后]：");
 	Print(array,len);
 	printf("\n");
