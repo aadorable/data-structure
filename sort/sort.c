@@ -406,18 +406,17 @@ void CountSort(int array[], size_t size){
         }
     }
     size_t range = max - min + 1;
-    int tmp[] = {range};
+    int tmp[range];                //辅助数组，用来统计每个数出现的次数
     memset(tmp, 0, sizeof(int) * range);
-    for(i = 0; i < size; ++i){
+    for(i = 0; i < size; ++i){     //统计数组中每个树出现的次数
         tmp[array[i] - min]++;
     }
-    int index = 0;
-    for(i = 0; i < range; ++i){
+    size_t index = 0;
+    for(i = 0; i < range; ++i){    //将排序好的树拷贝回原数组
         while(tmp[i]--){
             array[index++] = i + min;
         }
     }
-    free(tmp);
 }
 
 void Print(int array[], size_t size){
