@@ -390,7 +390,34 @@ void QuickSortByLoop(int array[], int64_t size){
 //计数排序
 /////////////////////////////////////////////////////////////
 void CountSort(int array[], size_t size){
-
+    if(size <= 1){
+        return;
+    }
+    int max = array[0];
+    int min = array[0];
+    //先找到数组中的最大值和最小值
+    size_t i = 0;
+    for(i = 1; i < size; ++i){
+        if(array[i] > max){
+            max = array[i];
+        }
+        if(array[i] < min){
+            min = array[i];
+        }
+    }
+    size_t range = max - min + 1;
+    int tmp[] = {range};
+    memset(tmp, 0, sizeof(int) * range);
+    for(i = 0; i < size; ++i){
+        tmp[array[i] - min]++;
+    }
+    int index = 0;
+    for(i = 0; i < range; ++i){
+        while(tmp[i]--){
+            array[index++] = i + min;
+        }
+    }
+    free(tmp);
 }
 
 void Print(int array[], size_t size){
@@ -446,6 +473,11 @@ int main(){
 
     QuickSortByLoop(array, len);
 	printf("[快速排序后]：");
+	Print(array,len);
+	printf("\n");
+
+    CountSort(array, len);
+	printf("[计数排序后]：");
 	Print(array,len);
 	printf("\n");
 	return 0;
