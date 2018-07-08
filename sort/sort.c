@@ -264,6 +264,8 @@ void MergeSortByLoop(int array[], int64_t size){
 //            平均O(N*logN)
 //空间复杂度：O(logN)
 //////////////////////////////////////////////////////////
+//
+
 
 //交换法
 int64_t Partion1(int array[], int64_t beg, int64_t end){
@@ -384,7 +386,14 @@ void QuickSortByLoop(int array[], int64_t size){
     }
 }
 
-void Print(int array[],size_t size){
+/////////////////////////////////////////////////////////////
+//计数排序
+/////////////////////////////////////////////////////////////
+void CountSort(int array[], size_t size){
+
+}
+
+void Print(int array[], size_t size){
 	size_t i = 0;
 	for(;i < size;++i){
 		printf("%d ",array[i]);
