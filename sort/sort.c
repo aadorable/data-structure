@@ -419,6 +419,52 @@ void CountSort(int array[], size_t size){
     }
 }
 
+/////////////////////////////////////////////////////////////////////////
+//基数排序
+////////////////////////////////////////////////////////////////////////
+int CountDigit(int* array, size_t size){  //统计数组中最大数的数量级
+    int base = 10;
+    int digit = 1;
+    size_t i = 0;
+    for(; i < size; ++i){
+        while(array[i] >= base){
+            digit++;
+            base *= 10;
+        }
+    }
+    return digit;
+}
+
+void BaseSort(int array[], size_t size){
+    if(size <= 1){
+        return;
+    }
+    int digit = CountDigit(array, size);
+    int base = 1;
+    int tmp[size];
+    while(digit--){
+        int count[10] = {0};             //统计个位相同的数出现的子树
+        size_t i = 0;
+        for(; i < size; ++i){
+            int index = array[i] / base % 10;
+            count[index]++;
+        }
+        int start[10] = {0};            //统计个位相同的数在array中的起始位置
+        for(i = 1; i < 10; ++i){
+            start[i] = start[i - 1] + count[i - 1];
+        }
+        memset(tmp, 0, sizeof(size_t) * size);
+        for(i = 0; i < size; ++i){
+            int index = array[i] / base % 10;
+            tmp[start[index]++] = array[i];
+        }
+        for(i = 0; i < size; ++i){
+            array[i] = tmp[i];
+        }
+        base *= 10;
+    }
+}
+
 void Print(int array[], size_t size){
 	size_t i = 0;
 	for(;i < size;++i){
@@ -477,6 +523,11 @@ int main(){
 
     CountSort(array, len);
 	printf("[计数排序后]：");
+	Print(array,len);
+	printf("\n");
+
+    BaseSort(array, len);
+	printf("[基数排序后]：");
 	Print(array,len);
 	printf("\n");
 	return 0;
